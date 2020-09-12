@@ -131,20 +131,60 @@ class LinkedList:
         return counter
 
     def pop(self, pos):
-        if pos>self.size()-1 or pos <0:
+        if abs(pos)>self.size():
             return "Out of Range"
-        if pos == 0:
-            self.head = self.head.next
-            return "Success"
-        if self.head != None:
-            p = self.head
-            b = None
-            for _ in range(pos):
-                b = p
-                p = p.next
-            b.next = p.next
-            return "Success"
-        return "Out of Range"
+        elif pos == 0:
+            if self.head != None:
+                self.head = self.head.next
+                if self.head != None:
+                    self.head.previous = None
+                return "Success"
+            else:
+                return "Out of Range"
+        elif pos>0:
+            if self.head != None:
+                count = 0
+                p = self.head
+                b = None
+                while p != None:
+                    if count == pos:
+                        if p == self.tail:
+                            self.tail = b
+                            b.next = None
+                        else:
+                            b.next = p.next
+                            b.next.previous = b
+                        return "Success"
+                    b = p
+                    p = p.next
+                    count+=1
+            return "Out of Range"
+        elif pos<0:
+            if self.tail != None:
+                count = 0
+                p = self.tail
+                b = None
+                while p != None:
+                    # print("compare count:pos",count,pos)
+                    if count == pos:
+                        if p == self.tail:
+                            # print("a")
+                            self.tail = p.previous
+                            self.tail.next = None
+                        elif p == self.head:
+                            # print("b")
+                            self.head = p.next
+                            self.head.previous = None
+                        else:
+                            # print("c")
+                            b.previous = p.previous
+                            b.previous.next = b
+                        return "Success"
+                    b = p
+                    p = p.previous
+                    count-=1
+            return "Out of Range"
+
 
 L = LinkedList()
 inp = input('Enter Input : ').split(',')
