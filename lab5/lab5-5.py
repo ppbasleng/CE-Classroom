@@ -1,3 +1,4 @@
+import math
 class Node:
     def __init__(self, value):
         self.value = value
@@ -20,7 +21,7 @@ def printLL(H):
     while p != None:
         strout+= str(p)+" "
         p = p.next
-    return strout
+    return strout[:-1]
 
 def SIZE(head):
     counter = 0
@@ -33,15 +34,17 @@ def SIZE(head):
     return counter
 
 def scramble(head, b, r, size):
+    #BottomUp Started
     bdown,btop = Node(None),Node(None)
     b0 = head
     temp1,temp2 = bdown,btop
     counter = 0
-    while counter<size: #BottomUp
-        if counter*100/size<b:
+    while counter<size: 
+        # print("::",(counter+1)*100/size,"/",b)
+        if math.floor((counter+1)*100)/size<=b:
             temp2.next = b0
             temp2 = temp2.next
-        elif counter*100/size>=b:
+        elif math.floor((counter+1)*100)/size>b:
             temp1.next = b0
             temp1 = temp1.next
         b0 = b0.next
@@ -51,6 +54,7 @@ def scramble(head, b, r, size):
     head = bdown.next
     print("BottomUp {0} % : {1}".format(format(b, '.3f'),printLL(head)))
 
+    #riffle Started
     rsum = Node(None)
     rtemp = rsum
     rl,rr = Node(None),Node(None)
@@ -58,10 +62,10 @@ def scramble(head, b, r, size):
     templ,tempr = rl,rr
     counter = 0
     while counter<size:
-        if counter*100/size<r:
+        if math.floor((counter+1)*100/size)<=r:
             templ.next = r0
             templ = templ.next
-        elif counter*100/size>=r:
+        elif math.floor((counter+1)*100)/size>r:
             templ.next = None
             tempr.next = r0
             tempr = tempr.next
@@ -80,18 +84,84 @@ def scramble(head, b, r, size):
         rtemp.next = rl
     elif rr != None:
         rtemp.next = rr
-    # print("end while")
     head = rsum.next
     print("Riffle {0} % : {1}".format(format(r, '.3f'),printLL(head)))
-    # print("end fuction")
 
     
-
-
-
-
+    #deriffle Started
+    rsum = Node(None)
+    rtemp = rsum
+    rl,rr,rre = Node(None),Node(None),Node(None)
+    r0 = head
+    templ,tempr = rl,rr
+    counter = 0
+    derifcount = 0
+    print("::",int(r/(100/size)),math.ceil((100-r)/(100/size)))
+    if r<=50:
+        derifcount = int(r/(100/size))
+    else:
+        derifcount = math.ceil((100-r)/(100/size))
+    print(derifcount)
     
+    while counter<derifcount:
+        
+        # print(":A:",(counter+1)*100/size,r0.value)
+        templ.next = r0
+        templ = templ.next
+        r0 = r0.next
+        # print(":B:",(counter+1)*100/size,r0.value)
+        if r0!=None:
+            tempr.next = r0
+            tempr = tempr.next
+            r0 = r0.next
+        counter+=1
+    if r<50:
+        rre.next = r0
+        tempre = rre
+        while tempre.next!=None:
+            tempre = tempre.next
+        if rre.next !=None:
+            templ.next = rr.next
+            tempr.next = rre.next
+        else:
+            templ.next = rr.next
+        tempre.next = None    
+    elif r>=50:
+        rre.next = r0
+        tempre = rre
+        while tempre.next!=None:
+            tempre = tempre.next
+        if rre.next !=None:
+            templ.next = rre.next
+            tempre.next = rr.next
+        else:
+            templ.next = rr.next
+        tempr.next = None   
+    head = rl.next
+    print("Deriffle {0} % : {1}".format(format(r, '.3f'),printLL(head)))
 
+    #Debottomup Started
+    bdown,btop = Node(None),Node(None)
+    b0 = head
+    
+    temp1,temp2 = bdown,btop
+    counter = 0
+    while counter<size: 
+        
+        if math.floor((counter)*100/size)<100-b:
+            # print("::",math.floor((counter)*100/size),"/",100-b,b0,"Left")
+            temp2.next = b0
+            temp2 = temp2.next
+        elif math.floor((counter)*100/size)>=100-b:
+            # print("::",math.floor((counter)*100/size),"/",100-b,b0,"Right")
+            temp1.next = b0
+            temp1 = temp1.next
+        b0 = b0.next
+        counter+=1
+        temp1.next = btop.next
+        temp2.next = None
+    head = bdown.next
+    print("Debottomup {0} % : {1}".format(format(b, '.3f'),printLL(head)))
 
 
 inp1, inp2 = input('Enter Input : ').split('/')
