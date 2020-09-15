@@ -55,6 +55,7 @@ def scramble(head, b, r, size):
     print("BottomUp {0} % : {1}".format(format(b, '.3f'),printLL(head)))
 
     #riffle Started
+    riffletime = 0
     rsum = Node(None)
     rtemp = rsum
     rl,rr = Node(None),Node(None)
@@ -63,9 +64,11 @@ def scramble(head, b, r, size):
     counter = 0
     while counter<size:
         if math.floor((counter+1)*100/size)<=r:
+            # print(":A:",math.floor((counter+1)*100/size),"/",r)
             templ.next = r0
             templ = templ.next
         elif math.floor((counter+1)*100)/size>r:
+            # print(":B:",math.floor((counter+1)*100/size),"/",r)
             templ.next = None
             tempr.next = r0
             tempr = tempr.next
@@ -80,6 +83,7 @@ def scramble(head, b, r, size):
         rtemp.next = rr
         rtemp = rtemp.next
         rr = rr.next
+        riffletime+=2
     if rl != None:
         rtemp.next = rl
     elif rr != None:
@@ -95,32 +99,37 @@ def scramble(head, b, r, size):
     r0 = head
     templ,tempr = rl,rr
     counter = 0
-    derifcount = 0
-    print("::",int(2*r/(100/size)),math.ceil(2*(100-r)/(100/size)))
-    if r<=50:
-        derifcount = int(2*r/(100/size))
-    else:
-        derifcount = math.ceil(2*(100-r)/(100/size))
-    if derifcount%2!=0:
-        derifcount-=1
-        print(derifcount)
-    
-    while counter<derifcount:
+    # derifcount = 0
+    # print("::",int(2*r/(100/size)),math.ceil(2*(100-r)/(100/size)))
+    # if r<=50:
+    #     derifcount = int(2*r/(100/size))
+    # else:
+    #     derifcount = math.ceil(2*(100-r)/(100/size))
+    # # if derifcount%2!=0:
+    # #     if size%2==0:
+    # #         derifcount-=1
+    # #     elif size%2==1:
+    # #         derifcount+=1
+        
+    # print(derifcount)
+    while counter<riffletime:
         if counter%2==0:
-            print(counter,":A:",(counter+1)*100/size,r0.value)
+            # print(counter,":A:",(counter+1)*100/size,r0.value)
             templ.next = r0
             templ = templ.next
             r0 = r0.next
+            counter+=1
         elif counter%2!=0:
-            print(counter,":B:",(counter+1)*100/size,r0.value)
+            # print(counter,":B:",(counter+1)*100/size,r0.value)
             tempr.next = r0
             tempr = tempr.next
             r0 = r0.next
-        counter+=1
-    if derifcount ==0:
+            counter+=1
+        
+    if riffletime ==0:
         rl.next = head
     elif r<50 or (r==50 and size%2!=0):
-        print("case1")
+        # print("case1")
         rre.next = r0
         tempre = rre
         while tempre.next!=None:
@@ -132,7 +141,7 @@ def scramble(head, b, r, size):
             templ.next = rr.next
         tempre.next = None    
     elif r>=50 or (r==50 and size%2==0):
-        print("case2")
+        # print("case2")
         rre.next = r0
         tempre = rre
         while tempre.next!=None:
