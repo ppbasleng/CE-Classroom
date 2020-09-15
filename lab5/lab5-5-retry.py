@@ -41,10 +41,10 @@ def scramble(head, b, r, size):
     counter = 0
     while counter<size: 
         # print("::",(counter+1)*100/size,"/",b)
-        if math.floor((counter+1)*100)/size<=b:
+        if ((counter+1)*100)/size<=b:
             temp2.next = b0
             temp2 = temp2.next
-        elif math.floor((counter+1)*100)/size>b:
+        elif ((counter+1)*100)/size>b:
             temp1.next = b0
             temp1 = temp1.next
         b0 = b0.next
@@ -62,13 +62,14 @@ def scramble(head, b, r, size):
     r0 = head
     templ,tempr = rl,rr
     counter = 0
+    rehand = 0
     while counter<size:
-        if math.floor((counter+1)*100/size)<=r:
-            # print(":A:",math.floor((counter+1)*100/size),"/",r)
+        if ((counter+1)*(100/size))<=r:
+            # print(":A:",r0,((counter+1)*(100/size)),"/",r)
             templ.next = r0
             templ = templ.next
-        elif math.floor((counter+1)*100)/size>r:
-            # print(":B:",math.floor((counter+1)*100/size),"/",r)
+        elif ((counter+1)*(100/size))>r:
+            # print(":B:",r0,((counter+1)*(100/size)),"/",r)
             templ.next = None
             tempr.next = r0
             tempr = tempr.next
@@ -86,8 +87,10 @@ def scramble(head, b, r, size):
         riffletime+=2
     if rl != None:
         rtemp.next = rl
+        rehand =1
     elif rr != None:
         rtemp.next = rr
+        rehand = 0
     head = rsum.next
     print("Riffle {0} % : {1}".format(format(r, '.3f'),printLL(head)))
 
@@ -99,19 +102,7 @@ def scramble(head, b, r, size):
     r0 = head
     templ,tempr = rl,rr
     counter = 0
-    # derifcount = 0
-    # print("::",int(2*r/(100/size)),math.ceil(2*(100-r)/(100/size)))
-    # if r<=50:
-    #     derifcount = int(2*r/(100/size))
-    # else:
-    #     derifcount = math.ceil(2*(100-r)/(100/size))
-    # # if derifcount%2!=0:
-    # #     if size%2==0:
-    # #         derifcount-=1
-    # #     elif size%2==1:
-    # #         derifcount+=1
-        
-    # print(derifcount)
+    # print(riffletime)
     while counter<riffletime:
         if counter%2==0:
             # print(counter,":A:",(counter+1)*100/size,r0.value)
@@ -125,11 +116,11 @@ def scramble(head, b, r, size):
             tempr = tempr.next
             r0 = r0.next
             counter+=1
+    # print("remainder:",r0,"remaining in hand:",rehand)
         
     if riffletime ==0:
         rl.next = head
-    elif r<50 or (r==50 and size%2!=0):
-        # print("case1")
+    elif rehand == 0:
         rre.next = r0
         tempre = rre
         while tempre.next!=None:
@@ -140,8 +131,7 @@ def scramble(head, b, r, size):
         else:
             templ.next = rr.next
         tempre.next = None    
-    elif r>=50 or (r==50 and size%2==0):
-        # print("case2")
+    elif rehand == 1:
         rre.next = r0
         tempre = rre
         while tempre.next!=None:
@@ -151,7 +141,31 @@ def scramble(head, b, r, size):
             tempre.next = rr.next
         else:
             templ.next = rr.next
-        tempr.next = None   
+        tempr.next = None    
+    # elif r<50 or (r==50 and size%2!=0):
+    #     # print("case1")
+    #     rre.next = r0
+    #     tempre = rre
+    #     while tempre.next!=None:
+    #         tempre = tempre.next
+    #     if rre.next !=None:
+    #         templ.next = rr.next
+    #         tempr.next = rre.next
+    #     else:
+    #         templ.next = rr.next
+    #     tempre.next = None    
+    # elif r>=50 or (r==50 and size%2==0):
+    #     # print("case2")
+    #     rre.next = r0
+    #     tempre = rre
+    #     while tempre.next!=None:
+    #         tempre = tempre.next
+    #     if rre.next !=None:
+    #         templ.next = rre.next
+    #         tempre.next = rr.next
+    #     else:
+    #         templ.next = rr.next
+    #     tempr.next = None   
     head = rl.next
     print("Deriffle {0} % : {1}".format(format(r, '.3f'),printLL(head)))
 
@@ -163,11 +177,11 @@ def scramble(head, b, r, size):
     counter = 0
     while counter<size: 
         
-        if math.floor((counter)*100/size)<100-b:
+        if ((counter)*100/size)<100-b:
             # print("::",math.floor((counter)*100/size),"/",100-b,b0,"Left")
             temp2.next = b0
             temp2 = temp2.next
-        elif math.floor((counter)*100/size)>=100-b:
+        elif ((counter)*100/size)>=100-b:
             # print("::",math.floor((counter)*100/size),"/",100-b,b0,"Right")
             temp1.next = b0
             temp1 = temp1.next
