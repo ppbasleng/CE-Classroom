@@ -67,7 +67,11 @@ class BST:
                 queue.append(node.left)
             if node.right is not None:
                 queue.append(node.right)
-
+    def printTree(self, node, level = 0):
+        if node != None:
+            self.printTree(node.right, level + 1)
+            print('     ' * level, node)
+            self.printTree(node.left, level + 1)
     
 
         
@@ -80,3 +84,5 @@ T.preOrder()
 T.inOrder()
 T.postOrder()
 T.breadthOrder()
+print()
+T.printTree(T.root)
