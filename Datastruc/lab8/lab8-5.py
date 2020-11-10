@@ -43,6 +43,7 @@ class Tree:
             max_node = pow(2,h+1)-1
 
             current = self.root
+            
 
             if self.num+1 > max_node:
 
@@ -66,7 +67,7 @@ class Tree:
 
             else:
 
-                # print(max_node-((max_node-(pow(2,h)-1))/2))
+                
 
                 if self.num+1 <= max_node-((max_node-(pow(2,h)-1))/2):
 
@@ -77,6 +78,8 @@ class Tree:
                     insert_subtree(current.right,self.num - pow(2,h),val)
 
                 self.num+=1
+            print("maxnode:",max_node,"num:",self.num,current)
+            print(max_node-((max_node-(pow(2,h)-1))/2))
 
                     
 
