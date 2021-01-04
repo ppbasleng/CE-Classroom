@@ -6,16 +6,19 @@ class Node:
         return self.data
     def add_Edge(self,edge):
         self.edge.append(edge)
-    def breath(self):
-        print("Bredth First Traversals : ",end="")
+    def breath(self,chk):
         strout =""
         traversed = []
         queue = []
         queue.append(self)
+        if self.data in chk:
+            chk.remove(self.data)
         while len(queue)!=0:
             vertex = queue.pop(0)
             # print("get",vertex.data)
             if vertex not in traversed:
+                if vertex.data in chk:
+                    chk.remove(vertex.data)
                 traversed.append(vertex)
                 strout += vertex.data+" "
                 tmpl = []
@@ -25,17 +28,21 @@ class Node:
                 # print()
                 tmpl.sort(key=lambda x: x.data, reverse=False)
                 queue.extend(tmpl)
-        print(strout[:-1])
-    def depth(self):
-        print("Depth First Traversals : ",end="")
+        return strout[:-1]
+    def depth(self,chk):
+        
         strout = ""
         traversed = []
         stack = []
         stack.append(self)
+        if self.data in chk:
+            chk.remove(self.data)
         while len(stack)!=0:
             vertex = stack.pop(-1)
             # print("get",vertex.data)
             if vertex not in traversed:
+                if vertex.data in chk:
+                    chk.remove(vertex.data)
                 traversed.append(vertex)
                 strout+= vertex.data+" "
                 tmpl = []
@@ -45,7 +52,7 @@ class Node:
                 # print()
                 tmpl.sort(key=lambda x: x.data, reverse=True)
                 stack.extend(tmpl)
-        print(strout[:-1])
+        return strout[:-1]
 def addlink(a,b,g):
     if g.get(a,-1) ==-1:
         g[a] = Node(a)
@@ -64,5 +71,14 @@ for i in inp:
     if i.split()[1] not in first:
         first.append(i.split()[1])
 first.sort()
-table[first[0]].depth()
-table[first[0]].breath()
+
+l = first.copy()
+print("Depth First Traversals :",end="")
+while len(l)!=0:
+    print("",table[l[0]].depth(l),end="")
+print()
+l = first.copy()
+print("Bredth First Traversals :",end="")
+while len(l)!=0:
+    print("",table[l[0]].breath(l),end="")
+print()

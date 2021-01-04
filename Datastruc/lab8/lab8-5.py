@@ -78,8 +78,7 @@ class Tree:
                     insert_subtree(current.right,self.num - pow(2,h),val)
 
                 self.num+=1
-            print("maxnode:",max_node,"num:",self.num,current)
-            print(max_node-((max_node-(pow(2,h)-1))/2))
+            
 
                     
 
