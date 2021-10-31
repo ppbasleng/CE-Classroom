@@ -1,0 +1,13 @@
+C:\Users\ppbas\OneDrive\Desktop\Covid-Workspace\OS_Sync_act1\bin\Debug\netcoreapp3.1\OS_Sync_act1.exe
+C:\Users\ppbas\OneDrive\Desktop\Covid-Workspace\OS_Sync_act1\bin\Debug\netcoreapp3.1\OS_Sync_act1.deps.json
+C:\Users\ppbas\OneDrive\Desktop\Covid-Workspace\OS_Sync_act1\bin\Debug\netcoreapp3.1\OS_Sync_act1.runtimeconfig.json
+C:\Users\ppbas\OneDrive\Desktop\Covid-Workspace\OS_Sync_act1\bin\Debug\netcoreapp3.1\OS_Sync_act1.runtimeconfig.dev.json
+C:\Users\ppbas\OneDrive\Desktop\Covid-Workspace\OS_Sync_act1\bin\Debug\netcoreapp3.1\OS_Sync_act1.dll
+C:\Users\ppbas\OneDrive\Desktop\Covid-Workspace\OS_Sync_act1\bin\Debug\netcoreapp3.1\OS_Sync_act1.pdb
+C:\Users\ppbas\OneDrive\Desktop\Covid-Workspace\OS_Sync_act1\obj\Debug\netcoreapp3.1\OS_Sync_act1.csprojAssemblyReference.cache
+C:\Users\ppbas\OneDrive\Desktop\Covid-Workspace\OS_Sync_act1\obj\Debug\netcoreapp3.1\OS_Sync_act1.AssemblyInfoInputs.cache
+C:\Users\ppbas\OneDrive\Desktop\Covid-Workspace\OS_Sync_act1\obj\Debug\netcoreapp3.1\OS_Sync_act1.AssemblyInfo.cs
+C:\Users\ppbas\OneDrive\Desktop\Covid-Workspace\OS_Sync_act1\obj\Debug\netcoreapp3.1\OS_Sync_act1.csproj.CoreCompileInputs.cache
+C:\Users\ppbas\OneDrive\Desktop\Covid-Workspace\OS_Sync_act1\obj\Debug\netcoreapp3.1\OS_Sync_act1.dll
+C:\Users\ppbas\OneDrive\Desktop\Covid-Workspace\OS_Sync_act1\obj\Debug\netcoreapp3.1\OS_Sync_act1.pdb
+C:\Users\ppbas\OneDrive\Desktop\Covid-Workspace\OS_Sync_act1\obj\Debug\netcoreapp3.1\OS_Sync_act1.genruntimeconfig.cache

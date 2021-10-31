@@ -1,0 +1,69 @@
+﻿using System;
+using System.Diagnostics;
+using System.Threading;
+
+namespace OS_Sync_act1
+{
+    class Program
+    {
+        private static string x = "";
+        private static int exitflag = 0;
+        private static int inputflag = 0;
+        private static object _Lock = new object();
+        static void ThReadx()
+        {
+
+            while (exitflag == 0)
+            {
+                lock (_Lock)
+                {   
+                    if(inputflag ==1){
+                        Console.WriteLine("X = {0}", x);
+                        inputflag = 0;
+                    }
+                    
+
+                }
+            }
+            Console.WriteLine("Thread 1 exit");
+        }
+
+        static void ThWritex()
+        {
+            string xx;
+            while (exitflag == 0)
+            {
+                lock (_Lock)
+                {
+
+                    Console.Write("input: ");
+                    xx = Console.ReadLine();
+                    
+                    if (xx == "exit")
+                    {   
+                        
+                        exitflag = 1;
+                    }
+                    else
+                    {
+                        inputflag = 1;
+                        x = xx;
+                    }
+                }
+
+            }
+        }
+
+
+
+        static void Main(string[] args)
+        {
+            Thread A = new Thread(ThReadx);
+            Thread B = new Thread(ThWritex);
+
+            A.Start();
+            B.Start();
+
+        }
+    }
+}
